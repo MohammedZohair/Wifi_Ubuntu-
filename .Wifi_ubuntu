@@ -20,7 +20,7 @@ if 'root' not in user:
     print ('Exiting....')
     quit()
 else:
-    print ('Good job, you\'re root.')
+    print ('Great, you\'re root.')
 
 print ("Trying to activate the default wlp2s0 network...")
 if not wifi("ifconfig"):

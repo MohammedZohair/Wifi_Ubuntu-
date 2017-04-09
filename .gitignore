@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 #Author Mohammed_Zohair
-#Connecting wifi in ubuntu 
+#Connecting wifi in ubuntu
 
 import os
 
-def commandExists(command):
+def wifi(command):
     def canExecute(file):
         return os.path.isfile(file) and os.access(file, os.X_OK)
     for path in os.environ["PATH"].split(os.pathsep):
@@ -23,7 +23,7 @@ else:
     print ('Good job, you\'re root.')
 
 print ("Trying to activate the default wlp2s0 network...")
-if not commandExists("ifconfig"):
+if not wifi("ifconfig"):
     print ("You will need the command 'ifconfig' to continue.")
     quit()
 status = os.popen("ifconfig wlp2s0 up").read()
@@ -51,13 +51,13 @@ if tpass == '':
 else:
     connectstatus = os.popen("iwconfig " + winame + " essid " + network + " key s:" + tpass)
 print ("Connecting...")
-if not commandExists("dhclient"):
+if not wifi("dhclient"):
     print ("Looks like there isn't a dhclient program on this computer. Trying dhcpd ")
     con2 = os.popen("dhcpcd " + winame).read()
     print (con2)
-    if not commandExists("dhcpcd"):
+    if not wifi("dhcpcd"):
         print ("Well, I'm out of options. Try installing dhcpd or dhclient.")
-        quit()    
+        quit()
 else:
     os.popen("dhclient " + winame)
 ontest = os.popen("ping -c 1 google.com").read()
